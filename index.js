@@ -26,74 +26,32 @@ client.on("message", function(message) {
 	switch(command) {
 		case "restart":
 			exec("docker service update --force valheim", (err, stdout, stderr) => {
-				if (err) {
-					const errorRestart = new Discord.MessageEmbed()
-						.setColor("#FF4500")
-						.setTitle("Valheim Restart")
-						.setDescription("Error restarting valheim server... call an admin!");
-					message.reply(errorRestart);
-				}
-				else {
-					console.log(stdout);
-					const restartEmbed = new Discord.MessageEmbed()
-						.setColor("#3CB371")
-						.setTitle("Valheim Restart")
-						.setDescription("Server checked for updates and has been restarted.");
-					message.reply(restartEmbed);
-				}
-
-				if (stderr){
-					console.log(stderr);
-				}
-
+				console.log(stdout);
+				const restartEmbed = new Discord.MessageEmbed()
+					.setColor("#3CB371")
+					.setTitle("Valheim Restart")
+					.setDescription("Server checked for updates and has been restarted.");
+				message.reply(restartEmbed);
 			});
 			break;
 		case "update":
 			exec("docker service update --force valheim", (err, stdout, stderr) => {
-				if (err) {
-					const errorRestart = new Discord.MessageEmbed()
-						.setColor("#FF4500")
-						.setTitle("Valheim Restart")
-						.setDescription("Error restarting valheim server... call an admin!");
-					message.reply(errorRestart);
-				}
-				else {
-					console.log(stdout);
-					const restartEmbed = new Discord.MessageEmbed()
-						.setColor("#3CB371")
-						.setTitle("Valheim Restart")
-						.setDescription("Server checked for updates and has been restarted.");
-					message.reply(restartEmbed);
-				}
-
-				if (stderr){
-					console.log(stderr);
-				}
-
+				console.log(stdout);
+				const restartEmbed = new Discord.MessageEmbed()
+					.setColor("#3CB371")
+					.setTitle("Valheim Restart")
+					.setDescription("Server checked for updates and has been restarted.");
+				message.reply(restartEmbed);
 			});
 			break;
 		case "patch":
 			exec("docker service update --force valheim", (err, stdout, stderr) => {
-				if (err) {
-					const errorRestart = new Discord.MessageEmbed()
-						.setColor("#FF4500")
-						.setTitle("Valheim Restart")
-						.setDescription("Error restarting valheim server... call an admin!");
-					message.reply(errorRestart);
-				}
-				else {
-					console.log(stdout);
-					const restartEmbed = new Discord.MessageEmbed()
-						.setColor("#3CB371")
-						.setTitle("Valheim Restart")
-						.setDescription("Server checked for updates and has been restarted.");
-					message.reply(restartEmbed);
-				}
-
-				if (stderr){
-					console.log(stderr);
-				}
-
+				console.log(stdout);
+				const restartEmbed = new Discord.MessageEmbed()
+					.setColor("#3CB371")
+					.setTitle("Valheim Restart")
+					.setDescription("Server checked for updates and has been restarted.");
+				message.reply(restartEmbed);
 			});
 			break;
 		default:
