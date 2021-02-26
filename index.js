@@ -25,12 +25,12 @@ client.on("message", function(message) {
 
 	switch(command) {
 		case "restart":
-			exec("sudo systemctl restart valheimserver.service", (err, stdout, stderr) => {
+			exec("docker service update --force valheim", (err, stdout, stderr) => {
 				if (err) {
 					const errorRestart = new Discord.MessageEmbed()
 						.setColor("#FF4500")
 						.setTitle("Valheim Restart")
-						.setDescription("Error restarting valheim server");
+						.setDescription("Error restarting valheim server... call an admin!");
 					message.reply(errorRestart);
 				}
 				else {
@@ -38,7 +38,7 @@ client.on("message", function(message) {
 					const restartEmbed = new Discord.MessageEmbed()
 						.setColor("#3CB371")
 						.setTitle("Valheim Restart")
-						.setDescription("Server has been restarted");
+						.setDescription("Server checked for updates and has been restarted.");
 					message.reply(restartEmbed);
 				}
 
@@ -48,46 +48,56 @@ client.on("message", function(message) {
 
 			});
 			break;
-		case "status":
-			exec("systemctl status valheimserver.service | egrep Active | sed 's/^[[:space:]]*//'", (err, stdout, stderr) => {
+		case "update":
+			exec("docker service update --force valheim", (err, stdout, stderr) => {
 				if (err) {
-					console.log(err);
-				} else {
-					let output = stdout;
-					let stat = output.split(" ")[1];
-					
-					switch (stat) {
-						case "active":
-							// these embeds could 100% be turned into a function but im good for now
-							const upEmbed = new Discord.MessageEmbed()
-								.setColor("#3CB371")
-								.setTitle("Valheim Server Status")
-								.setDescription("Server is up!")
-								.attachFiles(['./serverUp.gif'])
-								.setImage("attachment://serverUp.gif");
-							message.reply(upEmbed);
-							break;
-						case "inactive":
-							const downEmbed = new Discord.MessageEmbed()
-								.setColor("#FF4500")
-								.setTitle("Valheim Server Status")
-								.setDescription("Server is inactive - try restarting!");
-							message.reply(downEmbed);
-							break;
-						default:
-							const unknownEmbed = new Discord.MessageEmbed()
-								.setColor("#FF4500")
-								.setTitle("Valheim Server Status")
-								.setDescription("Server is in an unknown or failed state");
-							message.reply(unknownEmbed);
-							console.log(stat);
-							break;
-					}
+					const errorRestart = new Discord.MessageEmbed()
+						.setColor("#FF4500")
+						.setTitle("Valheim Restart")
+						.setDescription("Error restarting valheim server... call an admin!");
+					message.reply(errorRestart);
 				}
+				else {
+					console.log(stdout);
+					const restartEmbed = new Discord.MessageEmbed()
+						.setColor("#3CB371")
+						.setTitle("Valheim Restart")
+						.setDescription("Server checked for updates and has been restarted.");
+					message.reply(restartEmbed);
+				}
+
+				if (stderr){
+					console.log(stderr);
+				}
+
+			});
+			break;
+		case "patch":
+			exec("docker service update --force valheim", (err, stdout, stderr) => {
+				if (err) {
+					const errorRestart = new Discord.MessageEmbed()
+						.setColor("#FF4500")
+						.setTitle("Valheim Restart")
+						.setDescription("Error restarting valheim server... call an admin!");
+					message.reply(errorRestart);
+				}
+				else {
+					console.log(stdout);
+					const restartEmbed = new Discord.MessageEmbed()
+						.setColor("#3CB371")
+						.setTitle("Valheim Restart")
+						.setDescription("Server checked for updates and has been restarted.");
+					message.reply(restartEmbed);
+				}
+
+				if (stderr){
+					console.log(stderr);
+				}
+
 			});
 			break;
 		default:
-			message.reply("I have no idea what that means");
+			message.reply("I have no idea what that means... try 'patch', 'update', or 'restart'.");
 			break;
 	}
 });
