@@ -25,37 +25,19 @@ client.on("message", function(message) {
 
 	switch(command) {
 		case "restart":
-			exec("docker service update --force valheim", (err, stdout, stderr) => {
-				console.log(stdout);
-				const restartEmbed = new Discord.MessageEmbed()
-					.setColor("#3CB371")
-					.setTitle("Valheim Restart")
-					.setDescription("Server checked for updates and has been restarted.");
-				message.reply(restartEmbed);
-			});
+			exec("docker service update --force valheim", (err, stdout, stderr) => {});
+			message.reply("Server is checking for updates and restarting.");
 			break;
 		case "update":
-			exec("docker service update --force valheim", (err, stdout, stderr) => {
-				console.log(stdout);
-				const restartEmbed = new Discord.MessageEmbed()
-					.setColor("#3CB371")
-					.setTitle("Valheim Restart")
-					.setDescription("Server checked for updates and has been restarted.");
-				message.reply(restartEmbed);
-			});
+			exec("docker service update --force valheim", (err, stdout, stderr) => {});
+			message.reply("Server is checking for updates and restarting.");
 			break;
 		case "patch":
-			exec("docker service update --force valheim", (err, stdout, stderr) => {
-				console.log(stdout);
-				const restartEmbed = new Discord.MessageEmbed()
-					.setColor("#3CB371")
-					.setTitle("Valheim Restart")
-					.setDescription("Server checked for updates and has been restarted.");
-				message.reply(restartEmbed);
-			});
+			exec("docker service update --force valheim", (err, stdout, stderr) => {});
+			message.reply("Server is checking for updates and restarting.");
 			break;
 		default:
-			message.reply("I have no idea what that means... try 'patch', 'update', or 'restart'.");
+			message.reply("I have no idea what that means... try '!patch', '!update', or '!restart'.");
 			break;
 	}
 });
